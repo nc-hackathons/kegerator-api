@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql:/nc:kegerator1234@127.0.0.1:8080/kegerator'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://nc:kegerator1234@localhost:3306/kegerator'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql:///temp.db'
 db = SQLAlchemy(app)
 
 class Batch(db.Model):
