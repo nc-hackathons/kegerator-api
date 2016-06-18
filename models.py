@@ -24,7 +24,7 @@ class Batch(db.Model):
 class Beer(db.Model):
     __tablename__ = 'beers'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
+    name = db.Column(db.String(32), unique=True)
     batches = db.relationship('Batch', backref='beer', lazy='dynamic')
     
     def __init__(self, name):
@@ -33,7 +33,7 @@ class Beer(db.Model):
 class Keg(db.Model):
     __tablename__ = 'kegs'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
+    name = db.Column(db.String(32), unique=True)
     batches = db.relationship('Batch', backref='keg', lazy='dynamic')
     
     def __init__(self, name):
