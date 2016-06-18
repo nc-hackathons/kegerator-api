@@ -1,4 +1,4 @@
-# Kegerator Setup
+# Kegerator
 
 Disclaimer: I used `nc` as the name of my virtual environment to set up Python packages, but you can use whatever name you choose.
 
