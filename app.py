@@ -4,7 +4,7 @@ import IPython
 app = Flask(__name__)
 
 @app.route('/list')
-def list_all_batches():
-    return api.list_all_batches()
+def list_current_batches():
+    return api.list_current_batches()
     
 app.run()
