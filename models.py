@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql:/nc:kegerator1234@127.0.0.1:8080/kegerator'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://nc:kegerator1234@localhost:3306/kegerator'
 db = SQLAlchemy(app)
 
 class Batch(db.Model):
@@ -23,7 +23,7 @@ class Batch(db.Model):
 class Beer(db.Model):
     __tablename__ = 'beers'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
+    name = db.Column(db.String(32), unique=True)
     batches = db.relationship('Batch', backref='beer', lazy='dynamic')
     
     def __init__(self, name):
@@ -32,7 +32,7 @@ class Beer(db.Model):
 class Keg(db.Model):
     __tablename__ = 'kegs'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
+    name = db.Column(db.String(32), unique=True)
     batches = db.relationship('Batch', backref='keg', lazy='dynamic')
     
     def __init__(self, name):
