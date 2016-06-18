@@ -1,8 +1,17 @@
-# Kegerator Setup
+# Kegerator
 
 Disclaimer: I used `nc` as the name of my virtual environment to set up Python packages, but you can use whatever name you choose.
 
-    pip install virtualenv && pip install virtualenvwrapper
+Install pip with:
+
+    sudo apt-get install python-pip
+    sudo apt-get install python-dev
+
+Install mysql with:
+
+    sudo apt-get install mysql-server mysql-client libmysqlclient-dev
+
+    sudo pip install virtualenv && sudo pip install virtualenvwrapper
     
 In your ~/.bash_profile, add:
     source "/usr/local/bin/virtualenvwrapper.sh"
@@ -17,6 +26,7 @@ Then,
 
 In mysql,
 
+    CREATE DATABASE kegerator;
     CREATE USER 'nc'@'localhost' IDENTIFIED BY 'kegerator1234';
     GRANT ALL PRIVILEGES ON kegerator . * TO 'nc'@'localhost';
 
