@@ -3,7 +3,7 @@ from models import *
 import IPython
 app = Flask(__name__)
 
-@app.route('/batches')
+@app.route('/batches', methods=['GET'])
 def hello_world():
     return Batch.query.all()
     
