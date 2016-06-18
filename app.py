@@ -9,10 +9,18 @@ import RPi.GPIO as GPIO
 from Flow_Meter import *
 app = Flask(__name__)
 
-@app.route('/list')
+@app.route('/batches')
 def list_current_batches():
     return api.list_current_batches()
 
+@app.route('/')
+def list_all_batches():
+	return api.list_all_batches()
+
+@app.route('/kegs')
+def list_kegs():
+	return api.list_kegs()
+    
 app.run()
 
 
