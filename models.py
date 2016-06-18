@@ -76,12 +76,12 @@ class Pour(db.Model):
     
     def __init__(self, batch, volume):
         self.batch_id = batch.id
-        self.volume = volume
+        self.volume_poured = volume
         self.created_at = datetime.utcnow()
     
     def to_json(self):
         return {
-            # 'created_at': self.created_at.strftime("%Y-%m-%dT%T.620Z"),
+	    'created_at': self.created_at.strftime("%Y-%m-%dT%T.620Z"),
             'volume_poured': self.volume_poured
         }
 
