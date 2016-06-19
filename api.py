@@ -23,6 +23,8 @@ def list_kegs():
 def create_batch(beer_name, keg_name):
     beer = Beer.query.filter_by(name=beer_name).first()
     keg = Keg.query.filter_by(name=keg_name).first()
+    old_batch = Batch.query.filter_by(keg_id=keg.id).first()
+    old_batch.current = False
     db.session.merge(Batch(beer, keg, True))
     db.session.commit()
     
