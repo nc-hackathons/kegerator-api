@@ -1,11 +1,14 @@
-from flask import Flask
+from flask import Flask, request
 import api
 import IPython
 import os
 import time
 import math
 import logging
+from flask.ext.cors import CORS
+from flask_socketio import SocketIO
 app = Flask(__name__)
+socketio = SocketIO(app)
 CORS(app)
 
 @app.route('/batches')
@@ -24,4 +27,10 @@ def list_kegs():
 def create_batch():
 	return api.create_batch(request.form['beer_name'], request.form['keg_name'])
     
-app.run(host='0.0.0.0')
+@app.route('/pour_event', methods=['POST'])
+def pour_event():
+	socketio.emit('pour_event', { 'keg': request.json['keg'], 'tap_position': request.json['tap_position'] })
+	return ''
+
+#app.run(host='0.0.0.0')
+socketio.run(app, host='0.0.0.0', debug=True)
