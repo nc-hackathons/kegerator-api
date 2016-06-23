@@ -78,7 +78,7 @@ class Pour(db.Model):
     created_at = db.Column(db.DateTime)
     volume_poured = db.Column(db.Float)
     batch_id = db.Column(db.Integer, db.ForeignKey('batches.id'))
-    
+        
     def __init__(self, batch, volume):
         self.batch_id = batch.id
         self.volume_poured = volume
