@@ -5,6 +5,7 @@ import IPython
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://nc:kegerator1234@localhost:3306/kegerator'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 class Batch(db.Model):
