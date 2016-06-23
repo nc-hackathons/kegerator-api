@@ -30,8 +30,3 @@ db.session.add(batch1)
 db.session.add(batch2)
 db.session.add(batch3)
 db.session.commit()
-# create pour
-pour1 = Pour(batch1, 100)
-
-db.session.add(pour1)
-db.session.commit()
