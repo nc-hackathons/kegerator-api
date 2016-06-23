@@ -22,7 +22,7 @@ class Batch(db.Model):
         self.created_at = datetime.utcnow()
         
     def to_json(self):
-        all_pours = Pour.query.filter_by(batch_id=self.id).all()
+        all_pours = db.session.query(Pour).filter_by(batch_id=self.id).all()
         volume_poured = sum([pour.volume_poured for pour in all_pours])
         volume_left = Keg.query.filter_by(id=self.keg_id).first().total_volume - volume_poured
         return {

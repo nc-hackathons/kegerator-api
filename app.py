@@ -7,6 +7,7 @@ import math
 import logging
 from flask.ext.cors import CORS
 from flask_socketio import SocketIO
+from models import *
 app = Flask(__name__)
 socketio = SocketIO(app)
 CORS(app)
@@ -29,7 +30,22 @@ def create_batch():
     
 @app.route('/pour_event', methods=['POST'])
 def pour_event():
-	socketio.emit('pour_event', { 'keg': request.json['keg'], 'tap_position': request.json['tap_position'] })
+	print "CHANGING..."
+	print request.json
+	print request.json['tap_position']
+	keg_id = request.json['keg']
+
+        print "WTF????"
+	all_pours = Pour.query.filter_by(batch_id=4).all()
+	print len(all_pours)
+	
+
+	current_batch = Batch.query.filter_by(current=True, keg_id=keg_id).first()
+	if request.json['tap_position'] == "OFF":
+		pour_activity = Pour(current_batch, request.json['amount_poured'])
+		db.session.add(pour_activity)
+		db.session.commit() # Adds pour to database
+	socketio.emit('pour_event', { 'keg': keg_id, 'tap_position': request.json['tap_position'] })
 	return ''
 
 #app.run(host='0.0.0.0')

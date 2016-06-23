@@ -3,12 +3,13 @@ import json
 
 def list_current_batches():
     result = []
-    current_batches = Batch.query.filter_by(current=True).all()
+    db.session.query(Batch)
+    current_batches = db.session.query(Batch).filter_by(current=True).all()
     return json.dumps([batch.to_json() for batch in current_batches])
 
 def list_all_batches():
     result = []
-    current_batches = Batch.query.all()
+    current_batches = db.session.query(Batch).all()
     return json.dumps([batch.to_json() for batch in current_batches])
 
     
@@ -16,7 +17,8 @@ def list_kegs():
     result = []
     for keg in Keg.query.all():
         keg_dict = keg.to_json()
-        keg_dict["batch"] = Batch.query.filter_by(keg=keg).first().to_json()
+        keg_dict["batch"] = db.session.query(Batch).filter_by(keg=keg).order_by('-id').first().to_json()
+	print len(db.session.query(Pour).filter_by(batch_id=4).all())
         result.append(keg_dict)
     return json.dumps(result)
 
